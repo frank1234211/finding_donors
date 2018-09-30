@@ -13055,14 +13055,20 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 <p><strong>Answer: </strong></p>
 <p>I believe that Random Forest and Adaboost are appropriate for the task, and Adaboost are most appropriate.</p>
 <ul>
-<li>metrics
-Alougth Random Forest has best F score and accuracy on each size of training subset, but Adaboost has best F score and accuracy on each size of testing subset. Metrics on testing is more important than metrics on training, so Adaboost is the best.</li>
-<li>prediction/training time
-Obviously, SVM(SVC, suport vector classification, support vector machine for classifcation) took much more time both on prediction and training than Random Forest and Adaboost.
+<li>metrics<ul>
+<li>Alougth Random Forest has best F score and accuracy on each size of training subset, but Adaboost has best F score and accuracy on each size of testing subset. Metrics on testing is more important than metrics on training, so Adaboost is the best.</li>
+</ul>
+</li>
+<li>prediction/training time<ul>
+<li>Obviously, SVM(SVC, suport vector classification, support vector machine for classifcation) took much more time both on prediction and training than Random Forest and Adaboost.
 Random Forest took shorter time both on prediection and tranining than Adaboost, but the difference is small.</li>
-<li>the algorithm's suitability for the data.
-In theory, all of SVM, Random Forest and Adaboost are suitable for the data based on the reason descirbed in Question 2.
+</ul>
+</li>
+<li>the algorithm's suitability for the data.<ul>
+<li>In theory, all of SVM, Random Forest and Adaboost are suitable for the data based on the reason descirbed in Question 2.
 In practical, based on the experiment, all algorithms have good accuracy score and F score. Although SVM took much more prediction/training time than Random Forest and Adaboost, the time took by SVM is less than 3 minutes which is still acceptable.</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -13085,11 +13091,18 @@ In practical, based on the experiment, all algorithms have good accuracy score a
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
+<p><strong>Refined Answer: </strong></p>
 <ul>
-<li>The weakness of Adaboost is that Adaboost is sensitive to noise. However, Adaboost is supposed to work in CharityML becasue the data provider claimed that the data are reasonably clean records. (<a href="https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names">https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names</a>)</li>
-<li>Adaboost builds mutiple base models to reduce overfitting (accuracy is good in traning but bad in testing) and enhance accuracy. Base model can be decision tree or other model.
-Besides, Adaboost iteratively generates new base model trained by data where the previously misclassified data was assigned more weight than the weight of previously correctly classfied data. In other words, when Adaboost builds a new base model, it pays more attention on previously misclassified data to correctly classify them.</li>
+<li>Adaboost is an ensemble algorithm, which build multiple base models as a strong model to enhance testing accuracy. Base model is like an junior engineer. Decision made by many junior engineers in together tends to be more reliable than decision made by only one senior engineer.  </li>
+<li>In training phase, conceptually, Adaboost iteratively add new base model, and new model pay more attention on data which was misclassified by existing base models. In classfiication phase, Adaboost use all base models to make prediction.
+For example, if we want to use Adaboost to prepare a exam which allows multiple students to answer examination questions in together, the followings are the procedure. In training phase, we prepare 100 examination questions with correct answer. In the beginning, we let a student learn from the 100 examination questions with correct answer, and then let the student try to answer the 100 examination questions without seeing the answer. Next, we ask another student to learns from the description and correct answer of examination questions, and ask the student focus on the examination questions which are wrongly answered by previous student. In classification phase, we ask these students to answer newly examination questions with unknown answer in together.</li>
+<li>Here, I use decision tree as algorithm of base model in Adaboost. Algorithm of base model is like learning method of student in previous example. Decision tree is like the following figure. In the figure, "is sex male" is a decision condition, and "die" and "survied" is the classification result of decision tree.
+<img src="attachment:image.png" alt="image.png">
+(Source:<a href="https://en.wikipedia.org/wiki/Decision_tree_learning#/media/File:CART_tree_titanic_survivors.png">https://en.wikipedia.org/wiki/Decision_tree_learning#/media/File:CART_tree_titanic_survivors.png</a>)</li>
+</ul>
+<ul>
+<li>Decision tree is build by training dataset which has features and corresponding labels. In our problem, features are like age, and education-level, and label is income. Each internal node in decision tree is a decision condition based on a feature, and each leaf node accompanies a decision, such as "&lt;-50K" and "&gt;50K". In classification phase, we starts from the root node, and use the decision condition on the node to decide go to which child node. Finally, we ends in a leaf node, and the classification result is the decision in the leaf node. </li>
+<li>The weakness of Adaboost is that Adaboost is sensitive to noise. However, Adaboost is supposed to work in CharityML because the data provider claimed that the data are reasonably clean records. (<a href="https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names">https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names</a>)</li>
 </ul>
 
 </div>
